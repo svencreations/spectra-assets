@@ -113,6 +113,8 @@ if (pausableChangeoverTickers.length > 0) {
   });
 }
 
+console.log(document.readyState);
+
 document.addEventListener("DOMContentLoaded", (e) => {
   lazyload.run();
 });
