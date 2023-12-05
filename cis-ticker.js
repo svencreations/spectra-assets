@@ -116,6 +116,15 @@ if (pausableChangeoverTickers.length > 0) {
 
 console.log("state 2" + document.readyState);
 
-document.addEventListener("DOMContentLoaded", (e) => {
-  lazyload.run();
-});
+if (document.readyState === "loading") {  
+    // The document is still loading, you can attach your event listener
+    document.addEventListener("DOMContentLoaded", (e) => {
+      lazyload.run();
+    });
+} else {
+    // The `DOMContentLoaded` event has already fired, run your code directly
+    lazyload.run();
+}
+
+
+
