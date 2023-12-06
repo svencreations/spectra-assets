@@ -96,6 +96,7 @@ function cisThrottle(func, limit) {
 // Function to refresh marquee if marquee3k has marquees
 function refreshMarquee() {
     if (Marquee3k.length > 0) {
+        Marquee3k.pauseAll();
         Marquee3k.refreshAll();
     }
 }
