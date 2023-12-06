@@ -18,7 +18,7 @@ document.addEventListener("loadVideos", function() {
             }
 
             video.target.load();
-            video.target.classList.remove("lazy");
+            video.target.classList.remove("cis-lazy");
             // Set the flag to indicate the video has been loaded
             video.target.dataset.loaded = 'true';
           }
