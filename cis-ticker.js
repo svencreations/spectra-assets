@@ -5,7 +5,7 @@ if(typeof window.Marquee3k === "undefined") {
 }
 
 var lazyload = new yall({
-  target: "cis-lazy"
+  lazyClass: "cis-lazy"
 });
 
 var marquees = document.querySelectorAll(".cismarquee");
