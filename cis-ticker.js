@@ -98,6 +98,7 @@ function refreshMarquee() {
     if (Marquee3k.length > 0) {
         Marquee3k.pauseAll();
         Marquee3k.refreshAll();
+        Marquee3k.playAll();
     }
 }
 
