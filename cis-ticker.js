@@ -72,11 +72,13 @@ if (typeof window.yall === "undefined") {
 }
 
 if (document.readyState === "loading") {
+  console.log("loading readystate");
     // The document is still loading, you can attach your event listener
     document.addEventListener("DOMContentLoaded", (e) => {
       runMarquee();
     });
 } else {
+  console.log("ready state" + document.readyState);
     // The `DOMContentLoaded` event has already fired, run your code directly
     runMarquee();
 }
