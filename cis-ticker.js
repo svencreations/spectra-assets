@@ -49,3 +49,33 @@ if (pausableChangeoverTickers.length > 0) {
     });
   });
 }
+
+// Function to pause all marquees
+function pauseAllMarquees() {
+  var allMarquees = document.querySelectorAll(".cismarquee");
+  var dataIndexes = Array.from(allMarquees).map((marquee) => {
+    const dataIndexStr = marquee.getAttribute("data-marquee-index");
+    return parseInt(dataIndexStr, 10);
+  });
+  pauseChangeoverTickers(dataIndexes);
+}
+
+// Function to play all marquees
+function playAllMarquees() {
+  var allMarquees = document.querySelectorAll(".cismarquee");
+  var dataIndexes = Array.from(allMarquees).map((marquee) => {
+    const dataIndexStr = marquee.getAttribute("data-marquee-index");
+    return parseInt(dataIndexStr, 10);
+  });
+  playChangeoverTickers(dataIndexes);
+}
+
+// Event listener for visibility change
+document.addEventListener("visibilitychange", function() {
+  if (document.hidden) {
+    pauseAllMarquees();
+  } else {
+    playAllMarquees();
+  }
+});
+
