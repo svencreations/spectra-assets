@@ -8,16 +8,22 @@ document.addEventListener("loadVideos", function() {
     var lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
       entries.forEach(function(video) {
         if (video.isIntersecting) {
-          for (var source in video.target.children) {
-            var videoSource = video.target.children[source];
-            if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
-              videoSource.src = videoSource.dataset.src;
+          // Check if the video has already been loaded
+          if (video.target.dataset.loaded !== 'true') {
+            for (var source in video.target.children) {
+              var videoSource = video.target.children[source];
+              if (typeof videoSource.tagName === "string" && videoSource.tagName === "SOURCE") {
+                videoSource.src = videoSource.dataset.src;
+              }
             }
-          }
 
-          video.target.load();
-          video.target.classList.remove("lazy");
-          lazyVideoObserver.unobserve(video.target);
+            video.target.load();
+            video.target.classList.remove("lazy");
+            // Set the flag to indicate the video has been loaded
+            video.target.dataset.loaded = 'true';
+          }
+          // Continue observing for new duplicates of the video
+          // lazyVideoObserver.unobserve(video.target); // You might want to comment this out
         }
       });
     });
@@ -27,6 +33,10 @@ document.addEventListener("loadVideos", function() {
     });
   }
 });
+
+// Dispatch the 'loadVideos' event whenever needed, such as when the ticker updates
+// document.dispatchEvent(new Event("loadVideos"));
+
 
 // Check if the event can be dispatched immediately
 if (document.readyState === "complete") {
