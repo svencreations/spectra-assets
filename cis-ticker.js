@@ -93,6 +93,7 @@ function cisDebounce(func, delay) {
 // Function to refresh marquee if marquee3k has marquees
 function refreshMarquee() {
     if (Marquee3k.length > 0) {
+      console.log("refreshing");
         //Marquee3k.pauseAll();
         Marquee3k.refreshAll();
         //Marquee3k.playAll();
