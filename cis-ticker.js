@@ -71,6 +71,10 @@ if (typeof window.yall === "undefined") {
   })();
 }
 
+var lazyload = new yall({
+    target: "cis-lazy"
+  });
+
 if (document.readyState === "loading") {
   console.log("loading readystate");
     // The document is still loading, you can attach your event listener
@@ -84,9 +88,6 @@ if (document.readyState === "loading") {
 }
 
 function runMarquee() {
-  var lazyload = new yall({
-    target: "cis-lazy",
-  });
   lazyload.run();
 
   var marquees = document.querySelectorAll(".cismarquee");
