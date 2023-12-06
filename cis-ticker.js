@@ -79,3 +79,29 @@ document.addEventListener("visibilitychange", function() {
   }
 });
 
+// Throttle function
+function cisThrottle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Function to refresh marquee if marquee3k has marquees
+function refreshMarquee() {
+    if (Marquee3k.length > 0) {
+        Marquee3k.refreshAll();
+    }
+}
+
+// Throttle the refreshMarquee function, limit calls to once every 250 milliseconds
+const throttledRefreshMarquee = cisThrottle(refreshMarquee, 250);
+
+// Add the throttled function as the resize event listener
+window.addEventListener('resize', throttledRefreshMarquee);
