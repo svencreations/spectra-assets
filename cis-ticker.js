@@ -79,31 +79,28 @@ document.addEventListener("visibilitychange", function() {
   }
 });
 
-// Throttle function
-function cisThrottle(func, limit) {
-    let inThrottle;
+// Debounce function
+function cisDebounce(func, delay) {
+    let debounceTimer;
     return function() {
-        const args = arguments;
         const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
+        const args = arguments;
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    };
 }
 
 // Function to refresh marquee if marquee3k has marquees
 function refreshMarquee() {
     if (Marquee3k.length > 0) {
-        Marquee3k.pauseAll();
+        //Marquee3k.pauseAll();
         Marquee3k.refreshAll();
-        Marquee3k.playAll();
+        //Marquee3k.playAll();
     }
 }
 
-// Throttle the refreshMarquee function, limit calls to once every 250 milliseconds
-const throttledRefreshMarquee = cisThrottle(refreshMarquee, 250);
+// Debounce the refreshMarquee function, delay execution until 250 milliseconds of inactivity
+const debouncedRefreshMarquee = cisDebounce(refreshMarquee, 250);
 
-// Add the throttled function as the resize event listener
-window.addEventListener('resize', throttledRefreshMarquee);
+// Add the debounced function as the resize event listener
+window.addEventListener('resize', debouncedRefreshMarquee);
